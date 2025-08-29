@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class UsuarioController {
     @Autowired
     private final UsuarioService usuarioService;
 
-    @RequestMapping
+   @PostMapping
     public ResponseEntity<Void> criarUsuario(@RequestBody Usuario usuario){
         usuarioService.criarUsuario(usuario);
         return ResponseEntity.ok().build();
@@ -25,22 +27,27 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscarUsuarioPorEmail( @RequestParam String email){
-        return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
+    public ResponseEntity<List<Usuario>> buscarTodosUsuarios(){
+       List<Usuario> usuarios = usuarioService.buscarTodosUsuarios();
+       return ResponseEntity.ok(usuarios);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deletarUsuarioPorEmail(@RequestParam String email){
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deletarUsuarioPorEmail(@PathVariable String email){
         usuarioService.deletarUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Void> atualizandoUsuarioPorId(@RequestParam Integer id,
-                                                        @RequestBody Usuario usuario){
-
-        usuarioService.atualizandoUsuarioPorId(id,usuario);
-        return ResponseEntity.ok().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizandoUsuarioPorId(@PathVariable Integer id,
+                                                        @RequestBody Usuario usuario) {
+        try {
+            usuarioService.atualizandoUsuarioPorId(id, usuario);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
     }
+
 
 }

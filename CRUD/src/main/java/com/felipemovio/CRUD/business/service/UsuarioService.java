@@ -4,11 +4,15 @@ package com.felipemovio.CRUD.business.service;
 import com.felipemovio.CRUD.infrastructure.entity.Usuario;
 import com.felipemovio.CRUD.infrastructure.repository.UsuarioRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UsuarioService {
 
+    @Autowired
     private final UsuarioRepository repository;
 
     public UsuarioService(UsuarioRepository repository) {
@@ -20,11 +24,8 @@ public class UsuarioService {
 
     }
 
-    public Usuario buscarUsuarioPorEmail(String email){
-
-        return repository.findByEmail(email).orElseThrow( // tratamento caso o email nao seja encontrado
-                () -> new RuntimeException("email nao encontrado")
-        );
+    public List<Usuario> buscarTodosUsuarios() {
+        return repository.findAll() ;
     }
 
     public void deletarUsuarioPorEmail(String email){
