@@ -1,4 +1,4 @@
-package com.felipemovio.CRUD.business.service;
+package com.felipemovio.CRUD.service;
 
 
 import com.felipemovio.CRUD.infrastructure.entity.Usuario;

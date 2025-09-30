@@ -1,7 +1,7 @@
 package com.felipemovio.CRUD.controller;
 
 
-import com.felipemovio.CRUD.business.service.UsuarioService;
+import com.felipemovio.CRUD.service.UsuarioService;
 import com.felipemovio.CRUD.infrastructure.entity.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
