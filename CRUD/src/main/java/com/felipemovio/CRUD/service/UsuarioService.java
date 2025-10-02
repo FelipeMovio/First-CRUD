@@ -32,6 +32,11 @@ public class UsuarioService {
         repository.deleteByEmail(email);
     }
 
+    public void deletarUsuarioPorID(Integer id){
+        Usuario usuario = repository.findById(id).get();
+        repository.delete(usuario);
+    }
+
     public void atualizandoUsuarioPorId(Integer id, Usuario usuario){
          Usuario usuarioEntity = repository.findById(id).orElseThrow(() ->
                  new RuntimeException("Usuario nao encontrado"));
