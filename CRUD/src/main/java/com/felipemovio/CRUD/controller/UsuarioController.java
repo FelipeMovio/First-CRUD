@@ -38,6 +38,13 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarUsuarioPorId(@PathVariable Integer id){
+       usuarioService.deletarUsuarioPorID(id);
+       return ResponseEntity.ok().build();
+    }
+
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizandoUsuarioPorId(@PathVariable Integer id,
                                                         @RequestBody Usuario usuario) {
