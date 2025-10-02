@@ -4,20 +4,19 @@ package com.felipemovio.CRUD.service;
 import com.felipemovio.CRUD.infrastructure.entity.Usuario;
 import com.felipemovio.CRUD.infrastructure.repository.UsuarioRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
     @Autowired
     private final UsuarioRepository repository;
 
-    public UsuarioService(UsuarioRepository repository) {
-        this.repository = repository;
-    }
 
     public void criarUsuario(Usuario usuario){
         repository.saveAndFlush(usuario);
@@ -25,7 +24,8 @@ public class UsuarioService {
     }
 
     public List<Usuario> buscarTodosUsuarios() {
-        return repository.findAll() ;
+        List<Usuario> users = repository.findAll();
+        return users.stream().map(Usuario::new).toList();
     }
 
     public void deletarUsuarioPorEmail(String email){
