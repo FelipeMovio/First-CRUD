@@ -39,14 +39,14 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarUsuarioPorId(@PathVariable Integer id){
+    public ResponseEntity<Void> deletarUsuarioPorId(@PathVariable Long id){
        usuarioService.deletarUsuarioPorID(id);
        return ResponseEntity.ok().build();
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizandoUsuarioPorId(@PathVariable Integer id,
+    public ResponseEntity<Void> atualizandoUsuarioPorId(@PathVariable Long id,
                                                         @RequestBody Usuario usuario) {
         try {
             usuarioService.atualizandoUsuarioPorId(id, usuario);

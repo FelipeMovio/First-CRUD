@@ -15,7 +15,7 @@ public class Usuario {
 
     @Id // informando que é um Id
     @GeneratedValue(strategy = GenerationType.AUTO) // fazendo o Id ser gerado automaticamente
-    private Integer id;
+    private Long id;
 
     @Column(name = "email", unique = true) // nome da coluna e dizendo que o email tem q ser unico
     private String email;
