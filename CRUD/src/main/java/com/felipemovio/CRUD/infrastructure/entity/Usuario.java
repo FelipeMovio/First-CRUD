@@ -14,7 +14,7 @@ import lombok.*;
 public class Usuario {
 
     @Id // informando que é um Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // fazendo o Id ser gerado automaticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // fazendo o Id ser gerado automaticamente e em sequencia
     private Long id;
 
     @Column(name = "email", unique = true) // nome da coluna e dizendo que o email tem q ser unico
